@@ -1,16 +1,16 @@
 
-require_relative "argument_parser"
+require_relative "command_definition"
 require "test/unit"
 
-class TestArgumentParser < Test::Unit::TestCase
+class TestCommandDefinition < Test::Unit::TestCase
 
   def test_find_main_command
-    arguments = ArgumentParser.new("ls")
+    arguments = CommandDefinition.new("ls")
     assert_equal("ls", arguments.command)
   end
 
   def test_finds_argument_list
-    arguments = ArgumentParser.new("ls -a -b -c")
+    arguments = CommandDefinition.new("ls -a -b -c")
     assert_equal("ls", arguments.command)
     assert_equal(3, arguments.parameters.count)
 
@@ -20,7 +20,7 @@ class TestArgumentParser < Test::Unit::TestCase
   end
 
   def test_find_target
-    arguments = ArgumentParser.new("add 01_entry")
+    arguments = CommandDefinition.new("add 01_entry")
     assert_equal("add", arguments.command)
     assert_equal("01_entry", arguments.target)
   end

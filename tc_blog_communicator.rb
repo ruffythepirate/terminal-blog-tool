@@ -6,19 +6,19 @@ require "mocha/test_unit"
 class TestBlogCommunicator < Test::Unit::TestCase
 
   def setup
-    @html_service = mock('html_service')
+    @http_service = mock('http_service')
     @base_url = "my_url"
-    @service = BlogCommunicator.new(@base_url, @html_service)
+    @service = BlogCommunicator.new(@base_url, @http_service)
   end
 
   def test_lists_all_user_blogposts
-    @html_service.expects(:get).with(@base_url + "/api/user/post-list").returns([
+    @http_service.expects(:get).with(@base_url + "/api/user/post-list").returns([
       create_blog_list_item(1)
     ])
     blog_posts = @service.get_blog_posts
     assert_equal(1, blog_posts.count)
 
-    @html_service.expects(:get).with(@base_url + "/api/user/post-list").returns([
+    @http_service.expects(:get).with(@base_url + "/api/user/post-list").returns([
       create_blog_list_item(1),
       create_blog_list_item(2)
     ])

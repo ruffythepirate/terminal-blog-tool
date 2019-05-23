@@ -1,5 +1,4 @@
-
-class ArgumentParser
+class CommandDefinition
   attr_reader :command, :parameters, :target
 
   def initialize(command_string)
